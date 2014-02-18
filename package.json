@@ -1,0 +1,22 @@
+{
+  "name": "clearpipe",
+  "version": "0.0.0",
+  "description": "clearpipe\r =========",
+  "main": "lib/DebugProxyServer",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+	"bin": {
+		"clearpipe": "bin/clearpipe"
+	},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kybernetikos/clearpipe.git"
+  },
+  "author": "me@kybernetikos.com",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/kybernetikos/clearpipe/issues"
+  },
+  "homepage": "https://github.com/kybernetikos/clearpipe"
+}

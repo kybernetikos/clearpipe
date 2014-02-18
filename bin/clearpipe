@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+var DebugProxyServer = require('../');
+
+var descriptor = require('../package.json');
+
+// remove node and our own script from the arg array.
+var args = process.argv.slice(2);
+var scriptName = process.argv[1];
+
+if (args.length < 1 || args.length > 2 || args[0] === "--help" || args[0] === "-h") {
+	console.log(descriptor.name+" v"+descriptor.version);
+	console.log("Usage:");
+	console.log("\t"+scriptName+" <remote host>:<remote port> [<proxy port>]");
+	console.log("\t\tremote host is the host that the traffic you are inspecting is flowing to.");
+	console.log("\t\tremote port is the port that the traffic you are inspecting is flowing to.");
+	console.log("\t\tproxy port is the port that this debugging proxy will listen on.  Defaults to a random unused port.");
+} else {
+	var remote = args[0].split(":");
+	var remoteHost = remote[0];
+	var remotePort = remote[1];
+	var proxyPort = args.length < 2 ? 0 : args[1];
+
+	var proxyServer = new DebugProxyServer(remoteHost, remotePort, proxyPort);
+	proxyServer.start(function(port) {
+		console.log(descriptor.name+" listening for connections on port "+port+" ready to forward to "+remoteHost+":"+remotePort+".");
+	});
+}
